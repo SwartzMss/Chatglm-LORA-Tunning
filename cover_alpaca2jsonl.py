@@ -1,3 +1,4 @@
+#coding:utf-8
 import argparse
 import json
 from tqdm import tqdm
@@ -18,7 +19,7 @@ def main():
     parser.add_argument("--save_path", type=str, default="data/alpaca_data.jsonl")
 
     args = parser.parse_args()
-    with open(args.data_path) as f:
+    with open(args.data_path,'r', encoding='UTF-8') as f:
         examples = json.load(f)
 
     with open(args.save_path, 'w') as f:

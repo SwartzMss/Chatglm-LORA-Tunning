@@ -11,7 +11,7 @@ import datasets
 import os
 
 
-tokenizer = AutoTokenizer.from_pretrained("THUDM/chatglm-6b", trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained("..\\chatglm-6b-noint", trust_remote_code=True)
 
 
 @dataclass
@@ -75,7 +75,7 @@ def main():
 
     # init model
     model = AutoModel.from_pretrained(
-        "THUDM/chatglm-6b", load_in_8bit=True, trust_remote_code=True, device_map="auto"
+        "..\\chatglm-6b-noint", load_in_8bit=True, trust_remote_code=True, device_map="auto"
     )
     model.gradient_checkpointing_enable()
     model.enable_input_require_grads()
@@ -93,6 +93,7 @@ def main():
         r=finetune_args.lora_rank,
         lora_alpha=32,
         lora_dropout=0.1,
+        target_modules=["query_key_value"] #这部分还没确认,人设需求
     )
     model = get_peft_model(model, peft_config)
 
