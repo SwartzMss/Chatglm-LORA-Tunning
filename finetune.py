@@ -93,7 +93,7 @@ def main():
         r=finetune_args.lora_rank,
         lora_alpha=32,
         lora_dropout=0.1,
-        target_modules=["query_key_value"] #这部分还没确认,人设需求
+        target_modules=["query_key_value"]
     )
     model = get_peft_model(model, peft_config)
 

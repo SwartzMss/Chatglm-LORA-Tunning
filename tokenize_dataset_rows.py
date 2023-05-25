@@ -39,7 +39,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--jsonl_path", type=str, default="data/alpaca_data.jsonl")
     parser.add_argument("--save_path", type=str, default="data/alpaca")
-    parser.add_argument("--max_seq_length", type=int, default=384)
+    parser.add_argument("--max_seq_length", type=int, default=1024)
     parser.add_argument("--skip_overlength", type=bool, default=False)
     args = parser.parse_args()
 
