@@ -7,8 +7,8 @@ import transformers
 
 
 def preprocess(tokenizer, config, example, max_seq_length):
-    prompt = example["context"]
-    target = example["target"]
+    prompt = example["Instruction"]
+    target = example["output"]
     prompt_ids = tokenizer.encode(prompt, max_length=max_seq_length, truncation=True)
     target_ids = tokenizer.encode(
         target,
