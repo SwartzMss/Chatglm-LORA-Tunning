@@ -26,6 +26,17 @@ class CastOutputToFloat(nn.Sequential):
         return super().forward(x).to(torch.float32)
 
 
+
+'''
+ids_l：这是feature["input_ids"]的长度，也就是单个输入样本（已经被转换为模型可接受的形式，如词汇表索引）的长度。
+
+seq_len：这个是feature["seq_len"]的值。根据上下文推断，它应该是输入样本实际有效内容的长度。
+    在一些情况下，为了批量处理，我们会将不同长度的序列填充（pad）到相同长度。在这种情况下，seq_len可能会小于ids_l，因为ids_l可能包括了填充的部分。
+
+在这段代码中，ids_l和seq_len都被用于构造标签和调整输入序列的长度。
+    对于标签序列，前seq_len - 1个位置被设为-100，然后是input_ids从seq_len - 1开始的元素，最后是-100填充至总长度等于ids_l。
+
+'''
 def data_collator(features: list) -> dict:
     len_ids = [len(feature["input_ids"]) for feature in features]
     longest = max(len_ids)
